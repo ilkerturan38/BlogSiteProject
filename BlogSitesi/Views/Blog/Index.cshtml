@@ -1,0 +1,10 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/BlogTemplate.cshtml";
+}
+
+@Html.Action("FeaturedPostPV", "Blog")
+
+@Html.Action("BlogListPV", "Blog")
+
+@Html.Action("AddMailPV", "SubscribeMail")

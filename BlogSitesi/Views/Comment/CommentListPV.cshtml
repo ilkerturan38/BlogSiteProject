@@ -1,0 +1,26 @@
+﻿@using Entity.ConCrete
+@model IEnumerable<Comment>
+<div class="pt-5">
+
+    <h3>@ViewBag.yorumSayisi</h3>
+    @foreach (var item in Model)
+    {
+        <ul class="comment-list">
+
+            <li class="comment">
+
+                <div class="vcard">
+                    <img src="~/Content/miniblog/images/person_1.jpg" alt="Image placeholder">
+                </div>
+                <div class="comment-body">
+                    <h3>@item.NameSurname</h3>
+                    <div class="meta">@(((DateTime)item.CommentDate).ToString("dd MMM yyyy"))</div>
+                    <p>@item.commentText</p>
+                </div>
+            </li>
+
+        </ul>
+    }
+    @Html.Action("LeaveCommentPV", "Comment") @* Partial içinde,Partial Kullanıldı. *@
+
+</div>

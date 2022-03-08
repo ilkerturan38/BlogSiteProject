@@ -1,0 +1,242 @@
+﻿@model IEnumerable<Entity.ConCrete.Blog>
+@{
+    ViewBag.Title = "adminBlogList2";
+    Layout = "~/Views/Shared/AdminTemplate.cshtml";
+}
+
+@{
+    string color = "";
+}
+<!DOCTYPE html>
+
+<html>
+
+<body class="hold-transition sidebar-mini">
+
+    <!-- Main content -->
+
+    <section class="content">
+
+        <!-- Default box -->
+
+        <div class="card">
+
+            <div class="card-header">
+
+                <h3 class="card-title">Kategori Listesi</h3>
+
+                <div class="card-tools">
+
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+
+                        <i class="fas fa-minus"></i>
+
+                    </button>
+
+                    <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+
+                        <i class="fas fa-times"></i>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div class="card-body p-0">
+
+                <table class="table table-striped projects">
+
+                    <thead>
+
+                        <tr>
+
+                            <th style="width: 1%">
+
+                                ID
+
+                            </th>
+
+                            <th style="width: 20%">
+
+                                Blog Başlığı
+
+                            </th>
+
+                            <th style="width: 10%">
+
+                                Yazar
+
+                            </th>
+
+                            <th style="width: 10%">
+
+                                Beğeni Oranı
+
+                            </th>
+
+                            <th style="width: 7%" class="text-center" >
+
+                                Kategori
+
+                            </th>
+
+                            <th style="width: 20%">
+
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        @foreach (var item in Model)
+                        {
+
+                            if(item.category.categoryName=="Gündem")
+                            {
+                                color = "post-category text-white bg-warning mb-3";
+                            }
+                            if (item.category.categoryName == "Spor")
+                            {
+                                color = "post-category text-white bg-dark mb-3";
+                            }
+                            if (item.category.categoryName == "Sağlık")
+                            {
+                                color = "post-category text-white bg-info mb-3";
+                            }
+                            if (item.category.categoryName == "Yemek")
+                            {
+                                color = "post-category text-black bg-light mb-3";
+                            }
+                            if (item.category.categoryName == "Ekonomi")
+                            {
+                                color = "post-category text-white bg-success mb-3";
+                            }
+                            if (item.category.categoryName == "Magazin")
+                            {
+                                color = "post-category text-white bg-black mb-3";
+                            }
+                            if (item.category.categoryName == "Yazılım")
+                            {
+                                color = "post-category text-white bg-secondary mb-3";
+                            }
+                            if (item.category.categoryName == "Bilim")
+                            {
+                                color = "post-category text-white bg-transparent mb-3";
+                            }
+                            if (item.category.categoryName == "Kültür")
+                            {
+                                color = "post-category text-white bg-transparent mb-3";
+                            }
+                            if (item.category.categoryName == "Sinema")
+                            {
+                                color = "post-category text-white bg-transparent mb-3";
+                            }
+
+                            <tr>
+
+                                <td>
+
+                                    @item.blogID
+
+                                </td>
+
+                                <td>
+                                    @item.Title
+                                </td>
+
+                                <td>
+
+                                    <ul class="list-inline">
+
+                                        <li class="list-inline-item">
+
+                                            <img alt="Avatar" class="table-avatar" src="@item.Author.imageURL">
+
+                                        </li>
+
+                                    </ul>
+
+                                </td>
+
+                                <td class="project_progress">
+
+                                    <div class="progress progress-sm">
+
+                                        <div class="progress-bar bg-green" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100" style="width: 57%">
+
+                                        </div>
+
+                                    </div>
+
+                                    <small>
+
+                                        57% Complete
+
+                                    </small>
+
+                                </td>
+
+                                <td class="project-state">
+
+                                    <span class="@color">@item.category.categoryName</span>
+
+                                </td>
+
+                                <td class="project-actions text-right">
+
+                                    <a class="btn btn-primary btn-sm" href="/Blog/BlogDetails?ID=@item.blogID">
+
+                                        <i class="fas fa-folder">
+
+                                        </i>
+
+                                        Sitede Gör
+
+                                    </a>
+
+                                    <a class="btn btn-info btn-sm" href="/_adminBlog/Update/@item.blogID">
+
+                                        <i class="fas fa-pencil-alt">
+
+                                        </i>
+
+                                        Düzenle
+
+                                    </a>
+
+                                    <a class="btn btn-danger btn-sm" href="/_adminBlog/Delete/@item.blogID">
+
+                                        <i class="fas fa-trash">
+
+                                        </i>
+
+                                        Sil
+
+                                    </a>
+
+                                </td>
+
+                            </tr>
+                        }
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <!-- /.card-body -->
+
+        </div>
+
+        <!-- /.card -->
+
+    </section>
+
+</body>
+
+</html>
+

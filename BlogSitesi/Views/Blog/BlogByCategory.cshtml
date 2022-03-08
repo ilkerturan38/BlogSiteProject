@@ -1,0 +1,151 @@
+﻿@using PagedList
+@using PagedList.Mvc
+@model IPagedList<Entity.ConCrete.Blog>
+@{
+    ViewBag.Title = "BlogByCategory";
+    Layout = "~/Views/Shared/BlogTemplate.cshtml";
+}
+
+<style>
+    .wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .card {
+        overflow: hidden;
+        box-shadow: 0px 2px 20px #d7dfe2;
+        background: white;
+        border-radius: 0.5rem;
+        position: relative;
+        width: 350px;
+        margin: 1rem;
+        transition: 250ms all ease-in-out;
+        cursor: pointer;
+    }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 2px 40px #d7dfe2;
+        }
+
+    .banner-img {
+        position: absolute;
+        object-fit: cover;
+        height: 14rem;
+        width: 100%;
+    }
+
+    .category-tag {
+        font-size: 0.8rem;
+        font-weight: bold;
+        color: white;
+        background: red;
+        padding: 0.5rem 1.3rem 0.5rem 1rem;
+        text-transform: uppercase;
+        position: absolute;
+        z-index: 1;
+        top: 1rem;
+        border-radius: 0 2rem 2rem 0;
+    }
+
+    .popular {
+        background: #ef257a;
+    }
+
+    .technology {
+        background: #651fff;
+    }
+
+    .psychology {
+        background: #e85808;
+    }
+
+    .card-body {
+        margin: 15rem 1rem 1rem 1rem;
+    }
+
+    .blog-title {
+        line-height: 1;
+        margin: 1rem 0 0.5rem; 
+    }
+
+    .blog-title  a{
+        color:black;
+    }
+
+    .blog-description {
+        color: #616b74;
+        font-size: 0.9rem;
+    }
+
+    .card-profile {
+        display: flex;
+        margin-top: 2rem;
+        align-items: center;
+    }
+
+    .profile-img {
+        width: 60px;
+        height: 60px;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+
+    .card-profile-info {
+        margin-left: 1rem;
+    }
+
+    .profile-name {
+        font-size: 1rem;
+    }
+
+    .profile-followers {
+        color: #616b74;
+        font-size: 0.9rem;
+    }
+</style>
+
+<div class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <span>Category</span>
+                <h3>@ViewBag.categoryName</h3> @*Foreach Döngüsü kullanırsak Tabloda kaçtane Aynı kategoriID'ye kayıtlı Blog Kaydı varsa okadar Kategory ismini gösteriyor.'*@
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="wrapper">
+    @foreach (var item in Model)
+    {
+        <div class="card">
+            <div class="card-banner">
+                <p class="category-tag popular">@ViewBag.categoryName</p>
+                <img class="banner-img" src='@item.ImageURL' alt=''>
+            </div>
+            <div class="card-body">
+                <h2 class="blog-title"><a href="/Blog/BlogDetails/@item.blogID">@item.Title</a></h2><br />
+                <p class="blog-description">@Html.Raw(item.Content.Substring(0, item.Content.Substring(0, 200).LastIndexOf(" ")))..</p>
+
+                <div class="card-profile">
+                    <img class="profile-img" src='@item.Author.imageURL' alt=''>
+                    <div class="card-profile-info">
+                        <h3 class="profile-name">@item.Author.authorNameSurname</h3>
+                        <p class="profile-followers">@item.Author.authorTitle</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<div class="row text-center pt-5 border-top">
+    <div class="col-md-12">
+        <div class="custom-pagination">
+            @Html.PagedListPager((IPagedList)Model, page => Url.Action("BlogByCategory", new { page })) <!--BlogByCategory Sayfasına Yönlendir.Yeni Bir Sayfa değeri oluşturarak.-->
+        </div>
+    </div>
+</div>

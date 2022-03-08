@@ -1,0 +1,12 @@
+﻿@model Entity.ConCrete.testImage
+@{
+    ViewBag.Title = "testImage";
+    Layout = "~/Views/Shared/AdminTemplate.cshtml";
+}
+
+@using (Html.BeginForm("testImage", "_adminReports", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <input type="file" name="MyProperty" />
+    <button type="submit" class="btn btn-primary">Yeni Resim Ekle</button>
+}
+

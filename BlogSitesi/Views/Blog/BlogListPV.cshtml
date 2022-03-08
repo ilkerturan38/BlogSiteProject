@@ -1,0 +1,94 @@
+﻿@using PagedList
+@using PagedList.Mvc
+@using BlogSitesi
+@model IPagedList<Entity.ConCrete.Blog>
+
+@{
+    string color = "";
+    
+}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+<div class="site-section">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-12">
+                <h2>Post Listesi..</h2>
+            </div>
+        </div>
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                if (item.category.categoryName == "Teknoloji")
+                {
+                    color = "post-category text-white bg-secondary mb-3";
+                }
+                if (item.category.categoryName == "Gündem")
+                {
+                    color = "post-category text-white bg-dark mb-3";
+                }
+                if (item.category.categoryName == "Magazin")
+                {
+                    color = "post-category text-white bg-danger mb-3";
+                }
+                if (item.category.categoryName == "Spor")
+                {
+                    color = "post-category text-white bg-primary mb-3";
+                }
+                if (item.category.categoryName == "Sağlık")
+                {
+                    color = "post-category text-white bg-info mb-3";
+                }
+                if (item.category.categoryName == "Ekonomi")
+                {
+                    color = "post-category text-white bg-light mb-3";
+                }
+                if (item.category.categoryName == "Kültür")
+                {
+                    color = "post-category text-white bg-primary mb-3";
+                }
+                if (item.category.categoryName == "Bilim")
+                {
+                    color = "post-category text-white bg-success mb-3";
+                }
+                if (item.category.categoryName == "Yazılım")
+                {
+                    color = "post-category text-white bg-warning mb-3";
+                }
+                if (item.category.categoryName == "İş")
+                {
+                    color = "post-category text-white bg-black mb-3";
+                }
+                <div class="col-lg-4 mb-4">
+                    <div class="entry2">
+                        <a href="#"><img src="@item.ImageURL" alt="Image" class="img-fluid rounded"></a>
+                        <div class="excerpt">
+                            <span class="@color">@item.category.categoryName</span>
+
+                            @*<h2><a href="/Blog/BlogDetails?ID=@item.blogID">@item.Title</a></h2>*@
+
+                            <h2><a href="/Blog/BlogDetails/@item.blogID">@item.Title</a></h2>
+                            <div class="post-meta align-items-center text-left clearfix">
+                                <figure class="author-figure mb-0 mr-3 float-left"><img src="@item.Author.imageURL" alt="Image" class="img-fluid"></figure>
+                                <span class="d-inline-block mt-1">Yazar : <a href="#">@item.Author.authorNameSurname</a></span><br />
+                                <span>Tarih : @(((DateTime)item.Date).ToString("dd MMM yyyy"))</span> @* Tarih'i istenilen Formatta gösterme.*@
+                                <br />
+                                <span>Puan : @item.blogRating</span>
+
+                            </div>
+                            <br />
+                            <p>@Html.Raw(item.Content.Substring(0, item.Content.Substring(0, 200).LastIndexOf(" ")))..</p> @* LastIndefOf ile 120 karakter ve sonrasında,gelen boşluğa kadar içeriği al.Devamındaki kelimeyi alma ve gösterme.*@
+                            <p><a href="#">Devamını Oku..</a></p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="row text-center pt-5 border-top">
+            <div class="col-md-12">
+                <div class="custom-pagination">
+                    @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))
+                </div> <!--Modelden Gelen Değeri Sayfalama Yapısı İçine Aktardık.-->
+            </div> <!-- Modelden Gelen Değerler ; BlogController'da içerisindeki BlogByCategory'den gelen Sayfa Numarasını ve Her Sayfada Gözükücek Blog Kayıt Sayısı ve Blog Tablosundaki Toplam Kayıt Sayısı gelir.-->
+        </div>
+    </div>
+</div>

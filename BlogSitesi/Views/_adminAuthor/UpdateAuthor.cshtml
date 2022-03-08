@@ -1,0 +1,39 @@
+﻿@model Entity.ConCrete.Author
+@{
+    ViewBag.Title = "UpdateAuthor";
+    Layout = "~/Views/Shared/AdminTemplate.cshtml";
+}
+
+<form method="post" class="form-group">
+
+    @Html.HiddenFor(x => x.authorID, new { @class = "form-control" })
+
+    @Html.Label("Yazar Adı Soyadı")
+    @Html.TextBoxFor(x => x.authorNameSurname, new { @class = "form-control" })
+
+    @Html.Label("Yazar Resmi")
+    @Html.TextBoxFor(x => x.imageURL, new { @class = "form-control" })
+
+    @Html.Label("Yazar Hakkında")
+    @Html.TextAreaFor(x => x.about, 5, 20, new { @class = "form-control" })
+
+    @Html.Label("Yazar Yetenekler")
+    @Html.TextBoxFor(x => x.authorShort, new { @class = "form-control" })
+
+    @Html.Label("Yazar Statüsü (Mesleği)")
+    @Html.TextBoxFor(x => x.authorTitle, new { @class = "form-control" })
+
+    @Html.Label("Mail Adresi")
+    @Html.TextBoxFor(x => x.email, new { @class = "form-control" })
+
+    @Html.Label("Şifre")
+    @Html.TextBoxFor(x => x.password, new { @class = "form-control" })
+
+    @Html.Label("Telefon")
+    @Html.TextBoxFor(x => x.phoneNumber, new { @class = "form-control" })
+
+    <br />
+    <button class="btn btn-info">Güncelle</button>
+</form>
+
+

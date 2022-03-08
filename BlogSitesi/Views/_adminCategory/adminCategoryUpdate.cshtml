@@ -1,0 +1,29 @@
+﻿@model Entity.ConCrete.Category
+@{
+    ViewBag.Title = "adminCategoryUpdate";
+    Layout = "~/Views/Shared/AdminTemplate.cshtml";
+}
+
+<form method="post" class="form-group">
+
+    @Html.HiddenFor(x => x.categoryID, new { @class = "form-control" })
+
+    @Html.Label("Kategori Adı")
+    @Html.TextBoxFor(x => x.categoryName, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.categoryName)
+
+    @Html.Label("Kategori Açıklaması")
+    @Html.TextAreaFor(x => x.categoryDescription, 5, 20, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.categoryDescription)
+
+    <br />
+    <button class="btn btn-info">Güncelle</button>
+</form>
+
+@if (ViewBag.uyari != null)
+{
+    <div class="alert-warning animate__animated animate__fadeInLeft">
+        <strong>@ViewBag.uyari</strong>
+    </div>
+}
+

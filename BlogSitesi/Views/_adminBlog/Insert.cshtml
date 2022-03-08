@@ -1,0 +1,89 @@
+﻿@model Entity.ConCrete.Blog
+@{
+    ViewBag.Title = "Insert";
+    Layout = "~/Views/Shared/AdminTemplate.cshtml";
+}
+
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/css/datepicker.min.css'>
+<script src="https://cdn.ckeditor.com/ckeditor5/31.1.0/classic/ckeditor.js"></script>
+<script src="~/Scripts/jquery-3.6.0.min.js"></script>
+
+
+@using (Html.BeginForm("Insert", "_adminBlog", FormMethod.Post,new { enctype = "multipart/form-data"}))
+{
+
+    <div class="form-group">
+        <label for="title">Blog Başlığı</label>
+        <input type="text" class="form-control" id="title" aria-describedby="title" placeholder="Başlık" name="Title">
+        @*<small id="emailHelp" class="form-text text-muted"></small>*@
+        @Html.ValidationMessage("Title")
+    </div>
+    <div class="form-group">
+        <label for="editor">Blog İçeriği</label>
+        <textarea class="form-control" id="editor" aria-describedby="editor" placeholder="İçerik" rows="5" name="Content"></textarea>
+        @Html.ValidationMessage("Content")
+    </div>
+    <div class="form-group">
+        <label for="image">Blog Resmi</label>
+        <input type="file" class="form-control" id="image" accept=".png,.jpg,.jpeg" aria-describedby="image" name="ImageURL" placeholder="Resim">
+        @Html.ValidationMessage("ImageURL")
+    </div>
+    <div class="form-group">
+        <label for="datepicker1">Blog Oluşturma Tarihi</label>
+        <input type="text"
+               class="datepicker_input form-control border-2"
+               id="datepicker1"
+               placeholder="DD/MM/YYYY" name="Date" readonly>
+    </div>
+    @Html.ValidationMessage("Date")
+<div class="form-group">
+    <label for="editor">Kategori</label>
+    @*@Html.DropDownList("categoryID", ViewBag.categoryID as IEnumerable<SelectListItem>, new { @class = "form-control" })*@
+    @Html.DropDownListFor(model => model.categoryID, (List<SelectListItem>)ViewBag.categoryID, "--Select--", new { @class = "form-control" })
+   
+
+</div>
+    <div class="form-group">
+        <label for="editor">Yazar</label>
+        @Html.DropDownList("authorID", ViewBag.authorID as IEnumerable<SelectListItem>, new { @class = "form-control" })
+
+    </div>
+        <button type="submit" class="btn btn-primary" id="submit">Yeni Blog Kaydı Ekle</button>
+        }
+
+        <!-- Vanilla Datepicker JS -->
+        <script src='https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/js/datepicker-full.min.js'></script>
+
+        <script>
+            const getDatePickerTitle = elem => {
+                const label = elem.nextElementSibling;
+                let titleText = '';
+                if (label && label.tagName === 'LABEL') {
+                    titleText = label.textContent;
+                } else {
+                    titleText = elem.getAttribute('aria-label') || '';
+                }
+                return titleText;
+            }
+
+            const elems = document.querySelectorAll('.datepicker_input');
+            for (const elem of elems) {
+                const datepicker = new Datepicker(elem, {
+                    'format': 'dd/mm/yyyy', // UK format
+                    title: getDatePickerTitle(elem)
+                });
+            }
+        </script>
+
+        <script>
+            ClassicEditor
+                .create(document.querySelector('#editor'))
+                .then(editor => {
+                    console.log(editor);
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        </script>
+
+        

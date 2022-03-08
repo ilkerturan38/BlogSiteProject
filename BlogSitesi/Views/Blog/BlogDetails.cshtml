@@ -1,0 +1,37 @@
+﻿<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+@{
+    ViewBag.Title = "BlogDetails";
+    Layout = "~/Views/Shared/BlogTemplate.cshtml";
+}
+
+@Html.Action("BlogCoverPV", "Blog")
+
+<section class="site-section py-lg">
+    <div class="container">
+
+        <div class="row blog-entries element-animate">
+
+            <div class="col-md-12 col-lg-8 main-content">
+
+                @Html.Action("BlogReadAllPV", "Blog")
+
+                @Html.Action("CommentListPV", "Comment")
+
+            </div>
+            <div class="col-md-12 col-lg-4 sidebar">
+
+                @Html.Action("AuthorAboutPV", "Author")
+
+                @Html.Action("AuthorPopularPostPV", "Author")
+
+                @Html.Action("BlogDetailsCategoryListPv", "Category")
+
+            </div>
+
+        </div>
+    </div>
+</section>
+
+@*@Html.Action("OtherFeaturedPostPV", "Blog")*@
+
+@Html.Action("AddMailPV", "SubscribeMail")

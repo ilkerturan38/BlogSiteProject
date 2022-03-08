@@ -1,0 +1,13 @@
+CREATE TRIGGER islem
+ON Comment
+AFTER INSERT
+AS
+	BEGIN
+		DECLARE @blogID int,@blogRating int
+		SELECT @blogID=blogID,@blogRating=blogRating FROM inserted -- Comment Tablosuna Ekleme işlemi yapıldıktan sonra oluşturulan değişkenlere belirtilen alanları ata.
+		UPDATE Blog SET blogRating=(SELECT SUM(blogRating)/(SELECT COUNT(*) FROM Comment WHERE blogID=@blogID)
+		FROM Comment WHERE blogID=@blogID) WHERE blogID=@blogID 
+	END
+
+	-- Blog tablosunda güncelleme işlemi yaparken ; Yorum tablosunda blogRating değerlerini topla/ kaç tane yorum eklendiyse, blogID'ye göre bul,blogRating ortalamasını al.
+	-- Sonra Blog tablosunda bulunan blogRating Sütununa Ortalama sonucunu yazdır.Bu işlemide yine blogID'ye göre gerçekleştir.

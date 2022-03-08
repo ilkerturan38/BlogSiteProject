@@ -1,0 +1,102 @@
+﻿@model Entity.ConCrete.Blog
+@{
+    ViewBag.Title = "Update";
+    Layout = "~/Views/Shared/AdminTemplate.cshtml";
+}
+
+
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/css/datepicker.min.css'>
+<script src="https://cdn.ckeditor.com/ckeditor5/31.1.0/classic/ckeditor.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/js/datepicker-full.min.js'></script>
+
+@using (Html.BeginForm("Update", "_adminBlog", FormMethod.Post))
+{
+    <div class="form-group">
+        <label for="title">Blog Başlığı</label>
+        <input type="text" class="form-control" id="title" aria-describedby="title" placeholder="Başlık" name="Title" value="@Model.Title">
+    </div>
+    <div class="form-group">
+        <label for="editor">Blog İçeriği</label>
+        <textarea class="form-control" id="editor" aria-describedby="editor" placeholder="İçerik" rows="5" name="Content">@Model.Content</textarea>
+    </div>
+    <div class="form-inline">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="image" class="mr-3">Yeni Blog Resmi</label>
+                <input type="file" class="form-control" id="image" accept=".png,.jpg,.jpeg" aria-describedby="image" name="ImageURL" placeholder="Resim">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="image2" class="mr-3">Mevcut Blog Resmi </label>
+                <img src="@Model.ImageURL" id="image2" alt="Resim" width="180" height="160" />
+            </div>
+        </div>
+    </div>
+    <div class="form-inline mt-5">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="datepicker1" class="mr-3">Blog Oluşturma Tarihi</label>
+                <input type="text"
+                       class="datepicker_input form-control border-2"
+                       id="datepicker1"
+                       required
+                       placeholder="DD/MM/YYYY" name="Date">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="tarih" class="mr-3">Mevcut Blog Tarihi</label>
+                <input type="text" class="form-control" id="tarih" aria-describedby="Date" name="Date" value="@Model.Date">
+            </div>
+        </div>
+    </div>
+    <div class="form-group mt-5">
+        <label for="editor">Kategori</label>
+        @Html.DropDownList("categoryID", ViewBag.Category as IEnumerable<SelectListItem>, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label for="editor">Yazar</label>
+        @Html.DropDownList("authorID", ViewBag.Author as IEnumerable<SelectListItem>, new { @class = "form-control" })
+    </div>
+    <button type="submit" class="btn btn-primary">Güncelle</button>
+}
+@if (ViewBag.uyari != null)
+{
+    <div class="alert-warning animate__animated animate__fadeInLeft">
+        <strong>@ViewBag.uyari</strong>
+    </div>
+}
+<script>
+    const getDatePickerTitle = elem => {
+        const label = elem.nextElementSibling;
+        let titleText = '';
+        if (label && label.tagName === 'LABEL') {
+            titleText = label.textContent;
+        } else {
+            titleText = elem.getAttribute('aria-label') || '';
+        }
+        return titleText;
+    }
+
+    const elems = document.querySelectorAll('.datepicker_input');
+    for (const elem of elems) {
+        const datepicker = new Datepicker(elem, {
+            'format': 'dd/mm/yyyy', // UK format
+            title: getDatePickerTitle(elem)
+        });
+    }
+</script>
+
+<script>
+    ClassicEditor
+        .create(document.querySelector('#editor'))
+        .then(editor => {
+            console.log(editor);
+        })
+        .catch(error => {
+            console.error(error);
+        });
+</script>
+
+

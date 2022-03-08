@@ -1,0 +1,50 @@
+﻿<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+@if (TempData["uyari"] != null)
+{
+<div class="alert-warning animate__animated animate__fadeInLeft">
+    <strong>@TempData["uyari"]</strong>
+</div>}
+
+<div class="comment-form-wrap pt-5">
+
+    <h3 class="mb-5">Yorum Yapınız..</h3>
+    @*<h3 class="mb-5">@ViewBag.blogID</h3>*@
+    <form action="#" method="post" class="p-5 bg-light">
+        <!--LeaveCommentPV ActionResult Sayfası,CommentController'da tanımlanmıştır. O controller'a bağlıdır.Form Action'da Link Vermeye Gerek Yok.-->
+
+        @Html.AntiForgeryToken()
+
+        <!--Yorum Tablosundaki (Kullanıcının Elle Giriş Yapamıycağı Dahil Örn; YorumTarihi) Tüm Alanlar'ın Name Bilgilerini gerekli Html elemanlarına girilmeli.-->
+
+        <div class="form-group">
+            <input class="form-control" type="hidden" name="blogID" value="@ViewBag.blogID" /> <!--Hangi BlogID'ye Yorum Yapılıyor..-->
+        </div>
+        <div class="form-group">
+            <label for="name">Kullanıcı Adınız *</label>
+            <input type="text" class="form-control" id="NameSurname" name="NameSurname">
+        </div>
+        <div class="form-group">
+            <label for="email">Email *</label>
+            <input type="email" class="form-control" id="email" name="email">
+        </div>
+        <div class="form-group">
+            <label for="commentText">Yorumunuz *</label>
+            <textarea name="commentText" id="commentText" cols="30" rows="15" class="form-control"></textarea>
+        </div>
+        <div class="form-group">
+            <label>Puan Ver *</label><br /> <!-- 1.Değer ; id,name değerleridir. -- 2.Değer ; value : İçerik -->
+            <label>@Html.RadioButton("BlogRating", 1)1</label>
+            <label>@Html.RadioButton("BlogRating", 2)2</label>
+            <label>@Html.RadioButton("BlogRating", 3)3</label>
+            <label>@Html.RadioButton("BlogRating", 4)4</label>
+            <label>@Html.RadioButton("BlogRating", 5)5</label>
+        </div>
+        <div class="form-group">
+            <input type="hidden" class="form-control" id="CommentDate" name="CommentDate" value="@DateTime.Now.ToShortDateString()">
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Post Comment" class="btn btn-primary">
+        </div>
+    </form>
+</div>

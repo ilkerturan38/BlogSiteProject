@@ -1,0 +1,212 @@
+﻿@model IEnumerable<Entity.ConCrete.Blog>
+@{
+    ViewBag.Title = "AuthorBlogList";
+    Layout = "~/Views/Shared/AdminTemplate.cshtml";
+}
+
+@{string color="";} 
+@{string sonuc="";} 
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <style>
+    </style>
+</head>
+<body class="hold-transition sidebar-mini">
+
+    <!-- Main content -->
+
+    <section class="content">
+
+        <!-- Default box -->
+
+        <div class="card">
+
+            <div class="card-header">
+
+                <h3 class="card-title">Blog Listem</h3>
+
+                <div class="card-tools">
+
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+
+                        <i class="fas fa-minus"></i>
+
+                    </button>
+
+                    <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+
+                        <i class="fas fa-times"></i>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div class="card-body p-0">
+
+                <table class="table table-striped projects">
+
+                    <thead>
+
+                        <tr>
+
+                            <th style="width: 1%">
+
+                                ID
+
+                            </th>
+
+                            <th style="width: 20%">
+
+                                Blog Başlık
+
+                            </th>
+
+                            <th style="width: 20%">
+
+                                Blok Değerlendirme Oranı
+
+                            </th>
+
+                            <th style="width: 8%" class="text-center">
+
+                                Durum
+
+                            </th>
+
+                            <th style="width: 20%">
+
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        @foreach (var item in Model)
+                        {
+                            if (item.blogRating >= 85)
+                            {
+                                color = "post-category text-white bg-warning mb-3";
+                                sonuc = "Çok İyi";
+                            }
+                            if (item.blogRating >= 70 && item.blogRating <= 84)
+                            {
+                                color = "post-category text-white bg-info mb-3";
+                                sonuc = "Başarılı";
+                            }
+                            if (item.blogRating >= 50 && item.blogRating <= 69)
+                            {
+                                color = "post-category text-white bg-dark mb-3";
+                                sonuc = "Fena Değil";
+                            }
+                            if (item.blogRating >= 0 && item.blogRating <= 49)
+                            {
+                                color = "post-category text-white bg-danger mb-3";
+                                sonuc = "Kötü";
+                            }
+                            <tr>
+
+                                <td>
+
+                                    @item.blogID
+
+                                </td>
+
+                                <td>
+                                    @item.Title
+                                </td>
+
+                                <td class="project_progress">
+
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-danger progress-bar-striped" role="progressbar"
+                                             aria-valuenow="@item.blogRating" aria-valuemin="0" aria-valuemax="100" style="width:@item.blogRating%">
+                                            @item.blogRating% Complete
+                                        </div>
+                                    </div>
+
+                                    @*<div class="progress w-50">
+                                            <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" style="width:@item.blogRating%">@item.blogRating%</div>
+                                        </div>*@
+
+                                </td>
+
+                                <td class="project-state">
+
+                                    <span class="badge @color">@sonuc</span>
+
+                                </td>
+
+                                <td class="project-actions text-right">
+
+
+                                    <a class="btn btn-info btn-sm" href="/_adminBlog/Update/@item.blogID">
+
+                                        <i class="fas fa-pencil-alt">
+
+                                        </i>
+
+                                        Düzenle
+
+                                    </a>
+
+                                    <a class="btn btn-danger btn-sm" href="/_adminBlog/Delete/@item.blogID">
+
+                                        <i class="fas fa-trash">
+
+                                        </i>
+
+                                        Sil
+
+                                    </a>
+
+                                </td>
+
+                            </tr>
+                        }
+
+                    </tbody>
+
+                </table>
+
+                <br />
+                <a href="/_adminBlog/AddAuthor/" class="btn btn-primary">Yeni Blog Kaydı Ekle</a>
+
+            </div>
+
+            <!-- /.card-body -->
+
+        </div>
+
+        <!-- /.card -->
+
+    </section>
+
+    <script src="~/Scripts/jquery-3.6.0.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.progress-value > span').each(function () {
+                $(this).prop('Counter', 0).animate({
+                    Counter: $(this).text()
+                }, {
+                    duration: 1500,
+                    easing: 'swing',
+                    step: function (now) {
+                        $(this).text(Math.ceil(now));
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,21 @@
+﻿@model Entity.ConCrete.Admin
+@{
+    ViewBag.Title = "adminUserInsert";
+    Layout = "~/Views/Shared/AdminTemplate.cshtml";
+}
+
+<form method="post" class="form-group">
+    @Html.Label("Kullanıcı Adı")
+    @Html.TextBoxFor(x => x.username, new { @class = "form-control" })
+
+    @Html.Label("Şifre")
+    @Html.TextBoxFor(x => x.password, new { @class = "form-control" })
+
+    @Html.Label("Role")
+    @Html.TextBoxFor(x => x.adminRole, new { @class = "form-control" })
+
+    <br />
+    <button class="btn btn-info">Ekle</button>
+</form>
+
+

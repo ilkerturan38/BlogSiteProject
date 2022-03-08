@@ -1,0 +1,58 @@
+﻿@model Entity.ConCrete.Author
+@{
+    ViewBag.Title = "Profil";
+    Layout = "~/Views/Shared/AuthorTemplate.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+
+
+
+<body class="hold-transition sidebar-mini">
+
+    <div class="wrapper">
+
+        <section class="content">
+
+            <div class="container-fluid">
+
+                <div class="row">
+
+                    <!-- /.col -->
+
+                    <div class="col-md-12">
+
+                        <div class="card">
+
+                            <div class="card-body">
+
+                                    @Html.Action("ProfilPV1", "UserAuthor")
+
+                            </div><!-- /.card-body -->
+
+                        </div>
+
+                        <!-- /.nav-tabs-custom -->
+
+                    </div>
+
+                    <!-- /.col -->
+
+                </div>
+
+                <!-- /.row -->
+
+            </div><!-- /.container-fluid -->
+
+        </section>
+
+        <!-- /.content -->
+
+    </div>
+
+</body>
+
+</html>
+

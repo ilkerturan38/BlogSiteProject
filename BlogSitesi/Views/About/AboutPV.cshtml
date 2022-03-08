@@ -1,0 +1,70 @@
+﻿@model List<Entity.ConCrete.About>
+<div class="site-cover site-cover-sm same-height overlay single-page" style="background-image: url('../../Content/miniblog/images/img_4.jpg');">
+    <div class="container">
+        <div class="row same-height justify-content-center">
+            <div class="col-md-12 col-lg-10">
+                <div class="post-entry text-center">
+                    <h1 class="">About Us</h1>
+                    <p class="lead mb-4 text-white">Sizler için yüzlerce Blog yazan,Yazarlarımızı ve ekibimizi daha yakından tanımak ister misiniz ?</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="site-section bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 order-md-2">
+                @foreach (var item in Model)
+                {
+                    <img src="@item.ImageURL1" alt="Image" class="img-fluid">
+                }
+            </div>
+            <div class="col-md-5 mr-auto order-md-1">
+                <h2>Biz Kimiz ?</h2>
+                @foreach (var item in Model)
+                {
+                    <p>@item.Content1</p>
+                }
+                    <ul class="ul-check list-unstyled success">
+                        <li>Her 10 yeni Blog Yazısı</li>
+                        <li>15'ten Fazla Kategori</li>
+                        <li>21 Farklı Dinamik Yazar</li>
+                        <li>Günlük 4500 Tekil Okunma</li>
+                        <li>27 Farklı Ülkeden Takipçi</li>
+                        <li>Sosyal Medyada 325k Abone</li>
+                    </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@Html.Action("MeetTheTeam", "About") @*Farklı Tablodan Gelicek Veri // Partial içinde Partial Kullanıldı..*@
+
+
+<div class="site-section bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                @foreach (var item in Model)
+                {
+                    <img src="@item.ImageURL2" alt="Image" class="img-fluid">
+                }
+            </div>
+            <div class="col-md-5 ml-auto">
+                <h2>Neler Yapıyoruz ?</h2>
+                @foreach (var item in Model)
+                {
+                    <p class="mb-4">@item.Content2</p>
+                }
+                <ul class="ul-check list-unstyled success">
+                    <li>Onsectetur adipisicing elit</li>
+                    <li>Dolorem saepe non eligendi possimus</li>
+                    <li>Voluptate odit corrupti vitae</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

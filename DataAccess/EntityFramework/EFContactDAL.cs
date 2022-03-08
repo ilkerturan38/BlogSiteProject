@@ -1,0 +1,15 @@
+﻿using DataAccess.ConCrete;
+using DataAccess.ConCrete.Abstract;
+using Entity.ConCrete;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DataAccess.EntityFramework
+{
+    public class EFContactDAL:GenericRepository<Contact>,IcontactDAL
+    {
+    }
+}
